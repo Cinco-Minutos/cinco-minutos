@@ -1,5 +1,6 @@
 import React from 'react';
+import { HelloWorld } from '../../components'
 const Home: React.FC = () => {
-  return <div>Hello world!</div>;
+  return <HelloWorld />;
 };
 export default Home;

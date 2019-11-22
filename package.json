@@ -21,6 +21,7 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
+    "node-html-parser": "^1.1.16",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-precache-manifest": "^3.0.0",
     "parcel-plugin-pwa-manifest": "^2.5.3",
@@ -38,7 +39,10 @@
   "pwaManifest": {
     "genIconOpts": {
       "baseIcon": "public/icon.svg",
-      "sizes": [152]
+      "sizes": [
+        152
+      ],
+      "resizeMethod": "contain"
     }
   }
 }
