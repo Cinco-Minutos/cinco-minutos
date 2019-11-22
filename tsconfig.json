@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
