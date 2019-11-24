@@ -1,2 +1,2 @@
 import HelloWorld from './HelloWorld';
-export { HelloWorld }
+export { HelloWorld };
