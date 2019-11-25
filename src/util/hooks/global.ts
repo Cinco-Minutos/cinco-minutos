@@ -18,13 +18,10 @@ const createGlobalStateHook = <T>(name: string, defaultValue: T): GlobalStateHoo
       state,
       val => {
         globalState[name] = val;
-        updateStateFor.delete(setState);
-        for (const f of updateStateFor)
-        {
-          updateStateFor.delete(f);
+        const it = new Set(updateStateFor);
+        updateStateFor.clear();
+        for (const f of it)
           f(val);
-        }
-        setState(val);
       }
     ];
   };
