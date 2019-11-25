@@ -1,15 +1,19 @@
 import React from 'react';
 import { HelloWorld } from '../../components';
 import { useDarkMode } from '../../util/hooks';
+import { Button } from '@rmwc/button';
+import { Theme } from '@rmwc/theme';
 const Home: React.FC = () => {
   const [darkMode, setDarkMode] = useDarkMode();
   return (
-    <div>
+    <Theme use="textSecondaryOnBackground">
       <HelloWorld />
-      <button onClick={() => setDarkMode(!darkMode)}>
-        Toggle dark mode
-      </button>
-    </div>
+      <Button raised ripple onClick={() => setDarkMode(!darkMode)} style={{
+        display: 'block'
+      }}>
+        Toggle dark mode (currently {darkMode.toString()})
+      </Button>
+    </Theme>
   );
 };
 export default Home;
