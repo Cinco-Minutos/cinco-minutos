@@ -4,17 +4,26 @@ const globalState: {[k: string]: unknown} = JSON.parse(localStorage.getItem('glo
 const persistGlobalState = () => localStorage.setItem('globalState', JSON.stringify(globalState));
 window.addEventListener('beforeunload', persistGlobalState);
 
-type GlobalStateHook<T> = () => [T, (val: T) => void];
+type GlobalSetState<T> = (val: T) => void;
+type GlobalStateHook<T> = () => [T, GlobalSetState<T>];
 const createGlobalStateHook = <T>(name: string, defaultValue: T): GlobalStateHook<T> => {
+  const updateStateFor = new Set<GlobalSetState<T>>();
   let selectedState: T = globalState[name] as T;
   if (typeof selectedState === 'undefined')
     globalState[name] = selectedState = defaultValue;
   return () => {
     const [state, setState] = useState(selectedState);
+    updateStateFor.add(setState);
     return [
       state,
       val => {
         globalState[name] = val;
+        updateStateFor.delete(setState);
+        for (const f of updateStateFor)
+        {
+          updateStateFor.delete(f);
+          f(val);
+        }
         setState(val);
       }
     ];

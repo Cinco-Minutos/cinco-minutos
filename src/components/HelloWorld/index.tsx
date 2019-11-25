@@ -1,5 +1,7 @@
 import React from 'react';
+import { useDarkMode } from '../../util/hooks';
 const HelloWorld: React.FC = () => {
-  return <div>Hello world!</div>;
+  const darkMode = useDarkMode()[0];
+  return <div style={{color: darkMode ? 'gray' : 'black'}}>Hello world!</div>;
 };
 export default HelloWorld;
