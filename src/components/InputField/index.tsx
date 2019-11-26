@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField, TextFieldProps } from '@rmwc/textfield';
 export type StringCallback = (val: string) => void;
 const InputField: React.FC<{
