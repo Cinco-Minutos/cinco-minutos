@@ -1,23 +1,37 @@
-import React from 'react';
-import { HelloWorld, SearchBar } from '../../components';
-import { useDarkMode } from '../../util/hooks';
-import { Button } from '@rmwc/button';
+import React, { useState } from 'react';
+import { SearchBar } from '../../components';
+import { MenuItem } from '@rmwc/menu';
+import { Typography } from '@rmwc/typography';
+import debounce from 'lodash-es/debounce';
 const Home: React.FC = () => {
-  const [darkMode, setDarkMode] = useDarkMode();
+  const [isLoading, setLoading] = useState(false);
+  const onTextInput = debounce(
+    () => {
+      console.log('hiya');
+      setLoading(false);
+    },
+    1000,
+    {
+      leading: false,
+      trailing: true
+    }
+  );
   return (
     <>
-      <HelloWorld />
-      <Button
-        raised
-        ripple
-        onClick={() => setDarkMode(!darkMode)}
-        style={{
-          display: 'block'
-        }}
-      >
-        Toggle dark mode (currently {darkMode.toString()})
-      </Button>
-      <SearchBar onTextChange={console.log} />
+      <Typography use="body1">
+        <SearchBar
+          onTextChange={console.log}
+          onTextInput={() => {
+            if (!isLoading) setLoading(true);
+            onTextInput();
+          }}
+          loadingResults={isLoading}
+          results={[
+            <MenuItem key="hi">Hi</MenuItem>,
+            <MenuItem key="there">There</MenuItem>
+          ]}
+        />
+      </Typography>
     </>
   );
 };

@@ -3,6 +3,8 @@ import InputField, { StringCallback } from '../InputField';
 import { TextFieldProps } from '@rmwc/textfield';
 import { Icon, IconProps } from '@rmwc/icon';
 import { CircularProgress } from '@rmwc/circular-progress';
+import { MenuSurfaceAnchor, MenuSurface } from '@rmwc/menu';
+
 const CloseIcon: React.FC<{
   onClick: () => void;
 } & IconProps> = ({ onClick, ...props }) => (
@@ -29,7 +31,7 @@ const SearchBar: React.FC<{
   closeable = true,
   onTextChange,
   onTextInput,
-  loadingResults = true,
+  loadingResults = false,
   results,
   ...props
 }) => {
@@ -50,10 +52,14 @@ const SearchBar: React.FC<{
             />
           ) : null
         }
-        onTextChange={onTextChange}
+        onTextChange={v => {
+          onTextChange(v);
+          setShowResults(false);
+        }}
         onTextInput={v => {
           if (onTextInput) onTextInput(v);
           if (v.length) setShowResults(true);
+          else setShowResults(false);
         }}
         inputRef={inputRef}
         style={{
@@ -62,9 +68,8 @@ const SearchBar: React.FC<{
         {...props}
       />
       {showResults ? (
-        <div
+        <MenuSurfaceAnchor
           style={{
-            width: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -76,9 +81,15 @@ const SearchBar: React.FC<{
               Loading...
             </>
           ) : (
-            results
+            <MenuSurface
+              anchorCorner="bottomStart"
+              open={true}
+              style={{ width: '100%', maxWidth: 'unset' }}
+            >
+              {results}
+            </MenuSurface>
           )}
-        </div>
+        </MenuSurfaceAnchor>
       ) : null}
     </>
   );
