@@ -1,2 +1,4 @@
 import HelloWorld from './HelloWorld';
-export { HelloWorld };
+import InputField from './InputField';
+import SearchBar from './SearchBar';
+export { HelloWorld, InputField, SearchBar };

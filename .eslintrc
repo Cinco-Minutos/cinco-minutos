@@ -14,13 +14,13 @@
     }
   },
   "rules": {
-    "@typescript-eslint/camelcase": "off",
     "prefer-const": ["error", {
       "destructuring": "all"
     }],
     "@typescript-eslint/explicit-function-return-type": ["warn", {
       "allowExpressions": true
-    }]
+    }],
+    "react/prop-types": "off" // No need when using TypeScript (in most circumstances)
   },
   "settings": {
     "react": {
