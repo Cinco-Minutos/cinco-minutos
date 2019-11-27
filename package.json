@@ -15,6 +15,8 @@
     "gh-pages-publish-built": "export CM=$(git rev-parse --short --verify master); cd dist && git init && git add -A && git commit -m $CM && git remote add origin https://github.com/Cinco-Minutos/cinco-minutos.github.io && git push -fu origin master"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
     "@types/lodash-es": "^4.17.3",
     "@types/lz-string": "^1.3.33",
     "@types/react": "^16.9.11",
@@ -23,8 +25,10 @@
     "@types/react-router": "^5.1.3",
     "@types/react-router-dom": "^5.1.2",
     "@types/setimmediate": "^1.0.0",
+    "@types/styled-components": "^4.4.0",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -42,9 +46,13 @@
     "@rmwc/button": "^5.7.0",
     "@rmwc/circular-progress": "^5.7.0",
     "@rmwc/icon": "^5.7.0",
+    "@rmwc/icon-button": "^5.7.0",
     "@rmwc/menu": "^5.7.1",
+    "@rmwc/provider": "^5.7.0",
     "@rmwc/textfield": "^5.7.0",
     "@rmwc/theme": "^5.7.0",
+    "@rmwc/tooltip": "^5.7.0",
+    "@rmwc/top-app-bar": "^5.7.0",
     "@rmwc/typography": "^5.7.1",
     "lodash-es": "^4.17.15",
     "lz-string": "^1.4.4",
@@ -52,9 +60,9 @@
     "preact": "^10.0.5",
     "promise-polyfill": "^8.1.3",
     "react-helmet": "^5.2.1",
-    "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "setimmediate": "^1.0.5",
+    "styled-components": "^4.4.1",
     "whatwg-fetch": "^3.0.0"
   },
   "pwaManifest": {
@@ -72,11 +80,6 @@
   },
   "precacheManifest": {
     "inject": true,
-    "filter": "(safari-pinned-tab(.*).svg|(.*).map|sw.js)$"
-  },
-  "alias": {
-    "react": "preact/compat",
-    "react-dom/test-utils": "preact/test-utils",
-    "react-dom": "preact/compat"
+    "filter": "((safari-pinned-tab(.*).svg|(.*).(map|woff|woff2|eot|ttf))|sw.js)$"
   }
 }
