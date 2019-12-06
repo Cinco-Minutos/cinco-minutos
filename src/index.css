@@ -13,8 +13,9 @@
 @import '@material/top-app-bar/dist/mdc.top-app-bar.css';
 @import '@rmwc/tooltip/tooltip.css';
 @import '@material/icon-button/dist/mdc.icon-button.css';
+@import '@material/drawer/dist/mdc.drawer.css';
 @import 'material-design-icons-iconfont/dist/material-design-icons.css';
 body, html {
   margin: 0;
   padding: 0;
-} 
+}

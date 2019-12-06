@@ -3,19 +3,19 @@ import { SearchBar } from '../../components';
 import { MenuItem } from '@rmwc/menu';
 import { Typography } from '@rmwc/typography';
 import debounce from 'lodash-es/debounce';
+const onTextInput = debounce(
+  (setLoading: (v: boolean) => void) => {
+    console.log('hiya');
+    setLoading(false);
+  },
+  1000,
+  {
+    leading: false,
+    trailing: true
+  }
+);
 const Home: React.FC = () => {
   const [isLoading, setLoading] = useState(false);
-  const onTextInput = debounce(
-    () => {
-      console.log('hiya');
-      setLoading(false);
-    },
-    1000,
-    {
-      leading: false,
-      trailing: true
-    }
-  );
   return (
     <>
       <Typography use="body1">
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
           onTextChange={console.log}
           onTextInput={() => {
             if (!isLoading) setLoading(true);
-            onTextInput();
+            onTextInput(setLoading);
           }}
           loadingResults={isLoading}
           results={[

@@ -10,7 +10,7 @@
     "build": "yarn ts-check && yarn lint && yarn build-unchecked",
     "build-unchecked": "NODE_ENV=production parcel build public/index.html --no-source-maps --public-url ./",
     "ts-check": "tsc",
-    "lint": "eslint --fix src/**/*.ts src/**/*.tsx",
+    "lint": "eslint --fix \"src/**/*.ts\" \"src/**/*.tsx\"",
     "gh-pages-publish": "rm -rf dist && yarn build && yarn gh-pages-publish-built",
     "gh-pages-publish-built": "export CM=$(git rev-parse --short --verify master); cd dist && git init && git add -A && git commit -m $CM && git remote add origin https://github.com/Cinco-Minutos/cinco-minutos.github.io && git push -fu origin master"
   },
@@ -22,7 +22,6 @@
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
     "@types/react-helmet": "^5.0.14",
-    "@types/react-router": "^5.1.3",
     "@types/react-router-dom": "^5.1.2",
     "@types/setimmediate": "^1.0.0",
     "@types/styled-components": "^4.4.0",
@@ -37,6 +36,7 @@
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-precache-manifest": "^3.0.1",
     "parcel-plugin-pwa-manifest": "^2.5.6",
+    "parcel-plugin-static-files-copy": "^2.2.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -45,6 +45,7 @@
   "dependencies": {
     "@rmwc/button": "^5.7.0",
     "@rmwc/circular-progress": "^5.7.0",
+    "@rmwc/drawer": "^5.7.0",
     "@rmwc/icon": "^5.7.0",
     "@rmwc/icon-button": "^5.7.0",
     "@rmwc/menu": "^5.7.1",
@@ -65,6 +66,10 @@
     "styled-components": "^4.4.1",
     "whatwg-fetch": "^3.0.0"
   },
+  "precacheManifest": {
+    "inject": true,
+    "filter": "((safari-pinned-tab(.*).svg|(.*).(map|woff|woff2|eot|ttf))|sw.js)$"
+  },
   "pwaManifest": {
     "name": "¡Cinco Minutos!",
     "shortName": "CincoMinutos",
@@ -78,8 +83,12 @@
       "resizeMethod": "contain"
     }
   },
-  "precacheManifest": {
-    "inject": true,
-    "filter": "((safari-pinned-tab(.*).svg|(.*).(map|woff|woff2|eot|ttf))|sw.js)$"
+  "staticFiles": {
+    "staticPath": "src/static"
+  },
+  "alias": {
+    "react": "preact/compat",
+    "react-dom/test-utils": "preact/test-utils",
+    "react-dom": "preact/compat"
   }
 }

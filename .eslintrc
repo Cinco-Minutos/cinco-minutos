@@ -20,7 +20,10 @@
     "@typescript-eslint/explicit-function-return-type": ["warn", {
       "allowExpressions": true
     }],
-    "react/prop-types": "off" // No need when using TypeScript (in most circumstances)
+    "@typescript-eslint/no-unused-vars": ["warn", {
+      "ignoreRestSiblings": true
+    }],
+    "react/prop-types": "off" // No need when using TypeScript (in most circumstances - runtime vs compile-time)
   },
   "settings": {
     "react": {

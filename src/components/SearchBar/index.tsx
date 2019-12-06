@@ -84,6 +84,7 @@ const SearchBar: React.FC<{
             <MenuSurface
               anchorCorner="bottomStart"
               open={true}
+              onClose={() => setShowResults(false)}
               style={{ width: '100%', maxWidth: 'unset' }}
             >
               {results}
