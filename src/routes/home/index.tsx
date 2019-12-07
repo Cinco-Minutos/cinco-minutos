@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
 import { SearchBar } from '../../components';
-import { MenuItem } from '@rmwc/menu';
 import { Typography } from '@rmwc/typography';
 import debounce from 'lodash-es/debounce';
+import getData from '../../util/data';
+import filter from './util/filter';
 const onTextInput = debounce(
-  (setLoading: (v: boolean) => void) => {
-    console.log('hiya');
-    setLoading(false);
+  async (
+    input: string,
+    setResults: React.Dispatch<React.SetStateAction<React.ReactNode[]>>
+  ): Promise<void> => {
+    const quickSearch = await getData('quickSearch');
+    setResults(filter(input, quickSearch));
   },
-  1000,
+  500,
   {
     leading: false,
     trailing: true
   }
 );
 const Home: React.FC = () => {
-  const [isLoading, setLoading] = useState(false);
+  const [results, setResults] = useState<[string, string][]>([]);
+
   return (
     <>
       <Typography use="body1">
         <SearchBar
           onTextChange={console.log}
-          onTextInput={() => {
-            if (!isLoading) setLoading(true);
-            onTextInput(setLoading);
+          onTextInput={str => {
+            if (results) setResults([]);
+            onTextInput(str, setResults);
           }}
-          loadingResults={isLoading}
-          results={[
-            <MenuItem key="hi">Hi</MenuItem>,
-            <MenuItem key="there">There</MenuItem>
-          ]}
+          results={results}
         />
       </Typography>
     </>

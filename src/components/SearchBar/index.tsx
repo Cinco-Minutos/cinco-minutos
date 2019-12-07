@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import InputField, { StringCallback } from '../InputField';
 import { TextFieldProps } from '@rmwc/textfield';
 import { Icon, IconProps } from '@rmwc/icon';
 import { CircularProgress } from '@rmwc/circular-progress';
-import { MenuSurfaceAnchor, MenuSurface } from '@rmwc/menu';
+import { MenuSurfaceAnchor, MenuSurface, MenuItem } from '@rmwc/menu';
 
 const CloseIcon: React.FC<{
   onClick: () => void;
@@ -25,49 +25,47 @@ const SearchBar: React.FC<{
   closeable?: boolean;
   onTextChange: StringCallback;
   onTextInput?: StringCallback;
-  loadingResults?: boolean;
-  results?: React.ReactNode[];
+  results?: [string, string][];
 } & TextFieldProps> = ({
   closeable = true,
   onTextChange,
   onTextInput,
-  loadingResults = false,
   results,
   ...props
 }) => {
-  const inputRef = useRef();
+  const [value, setValue] = useState('');
   const [showResults, setShowResults] = useState(false);
   return (
     <>
       <InputField
         outlined
         icon="search"
+        value={value}
         trailingIcon={
           closeable ? (
             <CloseIcon
               onClick={() => {
-                (inputRef.current as HTMLInputElement).value = '';
+                setValue('');
                 setShowResults(false);
               }}
             />
           ) : null
         }
-        onTextChange={v => {
-          onTextChange(v);
-          setShowResults(false);
-        }}
+        onTextChange={onTextChange}
         onTextInput={v => {
           if (onTextInput) onTextInput(v);
-          if (v.length) setShowResults(true);
-          else setShowResults(false);
+          setValue(v);
+          setShowResults(!!v.length);
         }}
-        inputRef={inputRef}
+        onEnter={() => {
+          setShowResults(false);
+        }}
         style={{
           width: '100%'
         }}
         {...props}
       />
-      {showResults ? (
+      {results && showResults ? (
         <MenuSurfaceAnchor
           style={{
             display: 'flex',
@@ -75,20 +73,36 @@ const SearchBar: React.FC<{
             alignItems: 'center'
           }}
         >
-          {loadingResults ? (
+          {results.length ? (
+            <MenuSurface
+              anchorCorner="bottomStart"
+              open={true}
+              onClose={() => {
+                console.log(':(');
+                setShowResults(false);
+              }}
+              style={{ width: '100%', maxWidth: 'unset' }}
+            >
+              {results.map(v => (
+                <MenuItem
+                  key={v[0]}
+                  onClick={() => {
+                    setValue(v[0]);
+                    setShowResults(false);
+                    onTextChange(v[0]);
+                  }}
+                  tabIndex={0}
+                  ripple
+                >
+                  {v[0]}: {v[1]}
+                </MenuItem>
+              ))}
+            </MenuSurface>
+          ) : (
             <>
               <CircularProgress />
               Loading...
             </>
-          ) : (
-            <MenuSurface
-              anchorCorner="bottomStart"
-              open={true}
-              onClose={() => setShowResults(false)}
-              style={{ width: '100%', maxWidth: 'unset' }}
-            >
-              {results}
-            </MenuSurface>
           )}
         </MenuSurfaceAnchor>
       ) : null}

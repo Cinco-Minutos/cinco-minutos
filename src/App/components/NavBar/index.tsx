@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { Theme } from '@rmwc/theme';
 import { Typography } from '@rmwc/typography';
-import { Menu, MenuItem } from '@rmwc/menu';
+import { MenuItem } from '@rmwc/menu';
 import { Tooltip } from '@rmwc/tooltip';
 import routes from '../../../routes';
 import { Icon } from '@rmwc/icon';
@@ -69,14 +69,13 @@ const SelfHidingNavigationIcon: React.FC<CustomNavigationIconProps> = styled(
   }
 `;
 
-
 const NavBar = withRouter(({ history }) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   useEffect(() => {
     const resizeListener = (): void => {
       if (window.innerWidth > 600) setShowMobileMenu(false);
-    }
+    };
     window.addEventListener('resize', resizeListener);
     return () => window.removeEventListener('resize', resizeListener);
   }, []);
@@ -96,14 +95,21 @@ const NavBar = withRouter(({ history }) => {
             const name = route[2];
             const iconName = route[3];
             return (
-              <MenuItem onClick={() => {
-                history.push(path);
-                setShowMobileMenu(false);
-              }} key={path}>
+              <MenuItem
+                onClick={() => {
+                  history.push(path);
+                  setShowMobileMenu(false);
+                }}
+                key={path}
+              >
                 <Icon icon={iconName} />
-                <span style={{
-                  paddingLeft: '1rem'
-                }}>{name}</span>
+                <span
+                  style={{
+                    paddingLeft: '0.8rem'
+                  }}
+                >
+                  {name}
+                </span>
               </MenuItem>
             );
           })}
@@ -113,9 +119,9 @@ const NavBar = withRouter(({ history }) => {
         <TopAppBarRow>
           <TopAppBarSection alignStart>
             <SelfHidingNavigationIcon
-              icon='menu'
+              icon="menu"
               checked={showMobileMenu}
-              onIcon='close'
+              onIcon="close"
               reverse
               onChange={() => setShowMobileMenu(!showMobileMenu)}
             />

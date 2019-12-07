@@ -1906,6 +1906,11 @@
   resolved "https://registry.yarnpkg.com/@types/setimmediate/-/setimmediate-1.0.0.tgz#477e4feee19c6a75ab93e761980f1325ace04d62"
   integrity sha512-Rv1v1xr1x36nJzkWoYyFcHngeYkeZGQPEHXNpQR2nuIwRagpopyjBKpY5leXcksCJ8rGRBrN2hhg3taOywdr3A==
 
+"@types/string-similarity@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/string-similarity/-/string-similarity-3.0.0.tgz#12b655f1aab0156049657a4e9287caf3e6718d93"
+  integrity sha512-vhHkPKxl0cudrbxr5Dog1HVgUGXtmyYP95qy1da/h5gFEzIqDMN/+SjJAS7/6DEAdeI+AJQX8zrdWXL3wP4FRA==
+
 "@types/styled-components@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.4.0.tgz#15a3d59533fd3a5bd013db4a7c4422ec542c59d2"
@@ -6922,6 +6927,11 @@ stream-http@^2.7.2:
     readable-stream "^2.3.6"
     to-arraybuffer "^1.0.0"
     xtend "^4.0.0"
+
+string-similarity@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/string-similarity/-/string-similarity-3.0.0.tgz#07b0bc69fae200ad88ceef4983878d03793847c7"
+  integrity sha512-7kS7LyTp56OqOI2BDWQNVnLX/rCxIQn+/5M0op1WV6P8Xx6TZNdajpuqQdiJ7Xx+p1C5CsWMvdiBp9ApMhxzEQ==
 
 string-width@^1.0.1:
   version "1.0.2"
